@@ -1,10 +1,5 @@
 ﻿using CustomerEFCore.Domain;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CustomerEFCore.Data
 {
@@ -19,7 +14,7 @@ namespace CustomerEFCore.Data
         public CustomerContext(DbContextOptions<CustomerContext> options)
             : base(options)
         {
-            //ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
         public DbSet<Customer> Customers { get; set; }
@@ -32,10 +27,6 @@ namespace CustomerEFCore.Data
         {
             //modelBuilder.Entity<OrderDetail>().HasKey(o => new { o.OrderId, o.ProductId });
         }
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder
-        //        .UseSqlServer("Data Source=(local)\\SQLexpress;Initial Catalog=CustomerEFCORE2;Integrated Security=True");
-        //}
+        
     }
 }

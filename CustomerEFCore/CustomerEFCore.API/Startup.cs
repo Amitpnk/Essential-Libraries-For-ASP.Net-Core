@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using CustomerEFCore.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -28,9 +27,11 @@ namespace CustomerEFCore.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<CustomerContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("CustomerConn"))
-                      //.EnableSensitiveDataLogging()
-                   );
+
+            services.AddDbContext<CustomerContext>(opt =>
+                   opt.UseSqlServer(Configuration.GetConnectionString("SamuraiConnex"))
+                      .EnableSensitiveDataLogging()
+       );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,8 +41,6 @@ namespace CustomerEFCore.API
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            //app.UseHttpsRedirection();
 
             app.UseRouting();
 

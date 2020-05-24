@@ -2,7 +2,7 @@
 
 namespace CustomerEFCore.Data.Migrations
 {
-    public partial class init : Migration
+    public partial class initialsetup : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
