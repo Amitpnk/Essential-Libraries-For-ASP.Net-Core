@@ -6,7 +6,6 @@ using AutoMapper;
 using AutoMapperDemo.Mapping;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,12 +26,10 @@ namespace AutoMapperDemo
         {
             services.AddControllersWithViews();
 
-            // Auto Mapper Configurations
-            var mappingConfig = new MapperConfiguration(mc =>
-            {
+            // Auto Mapper Configurations  
+            var mappingConfig = new MapperConfiguration(mc => {
                 mc.AddProfile(new CustomerProfile());
             });
-
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
         }
@@ -47,10 +44,7 @@ namespace AutoMapperDemo
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
             }
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();

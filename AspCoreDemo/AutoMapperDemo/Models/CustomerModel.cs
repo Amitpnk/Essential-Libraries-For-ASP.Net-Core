@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace AutoMapperDemo.Models
 {
+
     public class CustomerModel
     {
         public int CustomerId { get; set; }
@@ -14,6 +15,6 @@ namespace AutoMapperDemo.Models
         public string Country { get; set; }
         public string City { get; set; }
         public string Pincode { get; set; }
-
     }
+
 }

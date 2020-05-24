@@ -1,5 +1,10 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using AutoMapperDemo.Models;
 using AutoMapper;
 
@@ -28,14 +33,12 @@ namespace AutoMapperDemo.Controllers
                 Country = "India",
                 Pincode = "560091"
             };
-
             var customerModel = _mapper.Map<CustomerModel>(customerdetails);
             var fullname = customerModel.FullName;
             var address = customerModel.City;
-
-
             return View();
         }
+
 
         public IActionResult Privacy()
         {

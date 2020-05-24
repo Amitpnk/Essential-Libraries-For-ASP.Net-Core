@@ -12,13 +12,11 @@ namespace AutoMapperDemo.Mapping
     {
         public CustomerProfile()
         {
-            // Mapping properties from Customer to CustomerModel
+            // Mapping properties from Customer to CustomerModel  
             CreateMap<Customer, CustomerModel>()
                 .ForMember(dest =>
-                        dest.FullName,
+                   dest.FullName,
                     opt => opt.MapFrom(src => src.FirstName + " " + src.MiddleName + " " + src.LastName));
-
-            // ForMember is used incase if any field doesn't match
         }
     }
 }

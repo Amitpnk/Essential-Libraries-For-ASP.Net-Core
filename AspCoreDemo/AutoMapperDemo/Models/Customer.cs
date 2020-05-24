@@ -19,4 +19,5 @@ namespace AutoMapperDemo.Models
         public string City { get; set; }
         public string Pincode { get; set; }
     }
+
 }
