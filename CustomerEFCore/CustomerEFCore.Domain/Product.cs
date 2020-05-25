@@ -14,6 +14,6 @@ namespace CustomerEFCore.Domain
         
         [Column(TypeName = "money")]
         public decimal UnitPrice { get; set; }
-        public Order Orders { get; set; }
+
     }
 }

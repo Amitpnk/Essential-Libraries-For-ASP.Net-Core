@@ -4,14 +4,16 @@ using CustomerEFCore.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CustomerEFCore.Data.Migrations
 {
     [DbContext(typeof(CustomerContext))]
-    partial class CustomerContextModelSnapshot : ModelSnapshot
+    [Migration("20200525091741_initial-setup")]
+    partial class initialsetup
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -130,6 +132,9 @@ namespace CustomerEFCore.Data.Migrations
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("OrdersOrderId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ProductName")
                         .HasColumnType("nvarchar(max)");
 
@@ -142,6 +147,8 @@ namespace CustomerEFCore.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("OrdersOrderId");
 
                     b.HasIndex("SupplierId");
 
@@ -192,6 +199,10 @@ namespace CustomerEFCore.Data.Migrations
                     b.HasOne("CustomerEFCore.Domain.Category", null)
                         .WithMany("Products")
                         .HasForeignKey("CategoryId");
+
+                    b.HasOne("CustomerEFCore.Domain.Order", "Orders")
+                        .WithMany()
+                        .HasForeignKey("OrdersOrderId");
 
                     b.HasOne("CustomerEFCore.Domain.Supplier", null)
                         .WithMany("Products")

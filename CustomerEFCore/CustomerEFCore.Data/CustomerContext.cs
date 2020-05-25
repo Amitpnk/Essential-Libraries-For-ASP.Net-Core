@@ -25,7 +25,7 @@ namespace CustomerEFCore.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<OrderDetail>().HasKey(o => new { o.OrderId, o.ProductId });
+            modelBuilder.Entity<OrderDetail>().HasKey(o => new { o.OrderId, o.ProductId });
         }
         
     }
