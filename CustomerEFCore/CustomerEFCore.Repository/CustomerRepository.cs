@@ -26,23 +26,21 @@ namespace CustomerEFCore.Repository
             _context.Customers.Remove(customer);
         }
 
-        public Task<Customer[]> GetAllCustomersAsync(bool includeOrders = false)
+        public async Task<Customer[]> GetAllCustomersAsync(bool includeOrders = false)
         {
-            //IQueryable<Customer> query = _context.Customers
-            //   .Include(c => c.);
+            IQueryable<Customer> query = _context.Customers
+               .Include(c => c.Orders);
 
-            //if (includeOrders)
-            //{
-            //    query = query
-            //      .Include(c => c.Orders.Select(t => new {t.OrderId, t.OrderDate}));
-            //}
+            if (includeOrders)
+            {
+                query = query
+                  .Include(c => c.Orders.Select(t => new { t.OrderId, t.OrderDate }));
+            }
 
             //// Order It
-            //query = query.OrderByDescending(c => c.EventDate);
+            query = query.OrderByDescending(c => c.CustomerId);
 
-            //return await query.ToArrayAsync();
-
-            throw new NotImplementedException();
+            return await query.ToArrayAsync();
         }
 
         public Task<Customer[]> GetAllCustomersByCustomerName(string customerName, bool includeOrders = false)

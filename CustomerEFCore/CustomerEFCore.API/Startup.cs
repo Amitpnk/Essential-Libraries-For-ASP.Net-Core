@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using CustomerEFCore.API.Mapping;
 using CustomerEFCore.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,7 +33,14 @@ namespace CustomerEFCore.API
             services.AddDbContext<CustomerContext>(opt =>
                    opt.UseSqlServer(Configuration.GetConnectionString("CustomerConnx"))
                       .EnableSensitiveDataLogging()
-       );
+                );
+
+            // Auto Mapper Configurations  
+            var mappingConfig = new MapperConfiguration(mc => {
+                mc.AddProfile(new CustomerProfile());
+            });
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
