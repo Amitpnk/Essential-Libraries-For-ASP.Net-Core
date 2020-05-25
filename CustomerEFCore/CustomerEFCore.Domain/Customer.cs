@@ -8,10 +8,10 @@ namespace CustomerEFCore.Domain
 {
     public class Customer
     {
-        //public Customer()
-        //{
-        //    Orders = new List<Order>();
-        //}
+        public Customer()
+        {
+            Orders = new List<Order>();
+        }
         public int CustomerId { get; set; }
         public string CustomerName { get; set; }
         public string ContactName { get; set; }
@@ -24,6 +24,6 @@ namespace CustomerEFCore.Domain
         public string Phone { get; set; }
         public string Fax { get; set; }
 
-        //public List<Order> Orders { get; set; }
+        public List<Order> Orders { get; set; }
     }
 }

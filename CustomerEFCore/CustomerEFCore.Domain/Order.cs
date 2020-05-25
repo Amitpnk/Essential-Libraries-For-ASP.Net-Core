@@ -14,7 +14,7 @@ namespace CustomerEFCore.Domain
         public int EmployeeId { get; set; }
         public DateTime OrderDate { get; set; }
         public DateTime RequiredDate { get; set; }
-        //public List<OrderDetail> OrderDetails { get; set; }
+        public List<OrderDetail> OrderDetails { get; set; }
 
     }
 }

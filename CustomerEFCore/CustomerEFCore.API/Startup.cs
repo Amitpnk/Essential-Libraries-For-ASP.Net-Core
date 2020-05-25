@@ -29,7 +29,7 @@ namespace CustomerEFCore.API
             services.AddControllers();
 
             services.AddDbContext<CustomerContext>(opt =>
-                   opt.UseSqlServer(Configuration.GetConnectionString("SamuraiConnex"))
+                   opt.UseSqlServer(Configuration.GetConnectionString("CustomerConnx"))
                       .EnableSensitiveDataLogging()
        );
         }

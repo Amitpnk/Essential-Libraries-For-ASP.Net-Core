@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CustomerEFCore.Data\CustomerEFCore.Data.csproj" />
+    <ProjectReference Include="..\CustomerEFCore.BL\CustomerEFCore.BL.csproj" />
   </ItemGroup>
 
 
