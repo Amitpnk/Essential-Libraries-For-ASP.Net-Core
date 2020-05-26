@@ -25,19 +25,19 @@ namespace CustomerEFCore.API.Controllers
 
         // GET: api/Customer
         [HttpGet]
-        public async Task<IEnumerable<CustomerModel>> Get()
+        public async Task<ActionResult<CustomerModel[]>> Get()
         {
             try
             {
                 var result = await _customerRepo.GetAllCustomersAsync();
 
-                var mappedResult = _mapper.Map<IEnumerable<CustomerModel>>(result);
+                var mappedResult = _mapper.Map<CustomerModel[]>(result);
                 return mappedResult;
             }
             catch (Exception)
             {
 
-                throw;
+                return this.StatusCode(StatusCodes.Status500InternalServerError, "Database Failure");
             }
 
 
