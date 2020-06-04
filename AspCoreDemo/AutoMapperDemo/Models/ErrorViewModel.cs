@@ -1,5 +1,3 @@
-using System;
-
 namespace AutoMapperDemo.Models
 {
     public class ErrorViewModel

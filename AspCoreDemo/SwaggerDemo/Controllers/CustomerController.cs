@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using SwaggerDemo.Data;
 using SwaggerDemo.Domain;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SwaggerDemo.Controllers
 {
@@ -52,14 +51,14 @@ namespace SwaggerDemo.Controllers
 
             return CreatedAtRoute("GetCustomer", new { id = customer.Id }, customer);
 
-           
+
         }
 
         // PUT api/<CustomerController>/5
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Customer customer)
         {
-            var customers = _context.Customers.First(a => a.Id==id);
+            var customers = _context.Customers.First(a => a.Id == id);
 
             if (customers == null)
             {
@@ -91,7 +90,7 @@ namespace SwaggerDemo.Controllers
             _context.SaveChanges();
 
             return NoContent();
-           
+
         }
     }
 }

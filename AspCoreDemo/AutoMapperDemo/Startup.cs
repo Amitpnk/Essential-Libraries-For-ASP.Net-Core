@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapperDemo.Mapping;
 using Microsoft.AspNetCore.Builder;
@@ -27,7 +23,8 @@ namespace AutoMapperDemo
             services.AddControllersWithViews();
 
             // Auto Mapper Configurations  
-            var mappingConfig = new MapperConfiguration(mc => {
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
                 mc.AddProfile(new CustomerProfile());
             });
             IMapper mapper = mappingConfig.CreateMapper();
