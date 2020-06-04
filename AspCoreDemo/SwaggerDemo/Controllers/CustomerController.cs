@@ -27,7 +27,7 @@ namespace SwaggerDemo.Controllers
         }
 
 
-        //// GET api/<CustomerController>/5
+        // GET api/<CustomerController>/5
         [HttpGet]
         [Route("{id}", Name = "GetCustomer")]
         public ActionResult<Customer> Get(int id)
