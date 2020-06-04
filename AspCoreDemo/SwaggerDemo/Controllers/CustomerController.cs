@@ -16,11 +16,7 @@ namespace SwaggerDemo.Controllers
         public CustomerController(CustomerContext context)
         {
             _context = context;
-
-
-
         }
-
 
         // GET: api/<CustomerController>
         [HttpGet]
@@ -80,8 +76,6 @@ namespace SwaggerDemo.Controllers
             return Ok(customers);
 
         }
-
-
 
         [HttpDelete]
         [Route("{customerId}")]
