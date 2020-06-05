@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +27,19 @@ namespace SwaggerDemo
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S1075:URIs should not be hardcoded", Justification = "URL is static")]
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc(setupAction =>
+             {
+                 setupAction.Filters.Add(
+                        new ProducesResponseTypeAttribute(StatusCodes.Status400BadRequest));
+                 setupAction.Filters.Add(
+                        new ProducesResponseTypeAttribute(StatusCodes.Status406NotAcceptable));
+                 setupAction.Filters.Add(
+                        new ProducesResponseTypeAttribute(StatusCodes.Status500InternalServerError));
+                 setupAction.Filters.Add(
+                        new ProducesDefaultResponseTypeAttribute());
+             });
+
+
             services.AddControllers();
 
             services.AddDbContext<CustomerContext>(opt =>
@@ -40,17 +54,17 @@ namespace SwaggerDemo
                     {
                         Title = "Customer API",
                         Version = "1",
-                        Description ="Through this API you can access customer details",
+                        Description = "Through this API you can access customer details",
                         Contact = new Microsoft.OpenApi.Models.OpenApiContact()
                         {
-                            Email="amit.naik8103@gmail.com",
-                            Name ="Amit Naik",
+                            Email = "amit.naik8103@gmail.com",
+                            Name = "Amit Naik",
                             Url = new Uri("https://amitpnk.github.io/")
                         },
-                        License = new Microsoft.OpenApi.Models.OpenApiLicense ()
+                        License = new Microsoft.OpenApi.Models.OpenApiLicense()
                         {
-                            Name ="MIT License",
-                            Url =new Uri("https://opensource.org/licenses/MIT")
+                            Name = "MIT License",
+                            Url = new Uri("https://opensource.org/licenses/MIT")
                         }
                     });
 
@@ -76,8 +90,8 @@ namespace SwaggerDemo
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-            });   
-            
+            });
+
             app.UseSwagger();
 
             app.UseSwaggerUI(setupAction =>

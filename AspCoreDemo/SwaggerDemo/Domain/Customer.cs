@@ -1,6 +1,6 @@
 ﻿namespace SwaggerDemo.Domain
 {
-   
+
     public class Customer
     {
         /// <summary>
