@@ -17,7 +17,10 @@ namespace SwaggerDemo.Controllers
             _context = context;
         }
 
-        // GET: api/<CustomerController>
+        /// <summary>
+        /// Get all customer details
+        /// </summary>
+        /// <returns>All customer details with id, customername and cutomer code fields</returns>
         [HttpGet]
         public ActionResult<IEnumerable<Customer>> Get()
         {
@@ -27,7 +30,11 @@ namespace SwaggerDemo.Controllers
         }
 
 
-        // GET api/<CustomerController>/5
+        /// <summary>
+        /// Get customer detail by id
+        /// </summary>
+        /// <param name="id">This id is unique/primary key of customer </param>
+        /// <returns>Customer details with id, customername and cutomer code fields</returns>
         [HttpGet]
         [Route("{id}", Name = "GetCustomer")]
         public ActionResult<Customer> Get(int id)

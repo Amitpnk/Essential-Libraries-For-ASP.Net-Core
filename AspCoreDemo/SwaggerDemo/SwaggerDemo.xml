@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SwaggerDemo</name>
+    </assembly>
+    <members>
+        <member name="M:SwaggerDemo.Controllers.CustomerController.Get">
+            <summary>
+            Get all customer details
+            </summary>
+            <returns>All customer details with id, customername and cutomer code fields</returns>
+        </member>
+        <member name="M:SwaggerDemo.Controllers.CustomerController.Get(System.Int32)">
+            <summary>
+            Get customer detail by id
+            </summary>
+            <param name="id">This id is unique/primary key of customer </param>
+            <returns>Customer details with id, customername and cutomer code fields</returns>
+        </member>
+        <member name="P:SwaggerDemo.Domain.Customer.Id">
+            <summary>
+            Id of Customer
+            </summary>
+        </member>
+        <member name="P:SwaggerDemo.Domain.Customer.CustomerName">
+            <summary>
+            Name of Customer
+            </summary>
+        </member>
+        <member name="P:SwaggerDemo.Domain.Customer.CustomerCode">
+            <summary>
+            code of Customer
+            </summary>
+        </member>
+    </members>
+</doc>
