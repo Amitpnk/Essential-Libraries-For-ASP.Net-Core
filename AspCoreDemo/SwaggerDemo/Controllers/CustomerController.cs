@@ -7,6 +7,7 @@ using System.Linq;
 namespace SwaggerDemo.Controllers
 {
     [Route("api/[controller]")]
+    [ApiExplorerSettings(GroupName = "OpenAPISpecificationCustomer")]
     [ApiController]
     public class CustomerController : ControllerBase
     {

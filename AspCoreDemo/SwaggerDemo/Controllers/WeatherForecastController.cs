@@ -6,6 +6,7 @@ using System.Linq;
 
 namespace SwaggerDemo.Controllers
 {
+    [ApiExplorerSettings(GroupName = "OpenAPISpecificationWeatherDefault")]
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase

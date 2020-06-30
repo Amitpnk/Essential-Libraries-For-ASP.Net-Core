@@ -49,7 +49,7 @@ namespace SwaggerDemo
             services.AddSwaggerGen(setupAction =>
             {
                 setupAction.SwaggerDoc(
-                    "OpenAPISpecification",
+                    "OpenAPISpecificationCustomer",
                     new Microsoft.OpenApi.Models.OpenApiInfo()
                     {
                         Title = "Customer API",
@@ -67,6 +67,26 @@ namespace SwaggerDemo
                             Url = new Uri("https://opensource.org/licenses/MIT")
                         }
                     });
+
+                setupAction.SwaggerDoc(
+                  "OpenAPISpecificationWeatherDefault",
+                  new Microsoft.OpenApi.Models.OpenApiInfo()
+                  {
+                      Title = "Weather default API",
+                      Version = "1",
+                      Description = "Through this API you can access customer details",
+                      Contact = new Microsoft.OpenApi.Models.OpenApiContact()
+                      {
+                          Email = "amit.naik8103@gmail.com",
+                          Name = "Amit Naik",
+                          Url = new Uri("https://amitpnk.github.io/")
+                      },
+                      License = new Microsoft.OpenApi.Models.OpenApiLicense()
+                      {
+                          Name = "MIT License",
+                          Url = new Uri("https://opensource.org/licenses/MIT")
+                      }
+                  });
 
                 var xmlCommentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentsFile);
@@ -96,7 +116,9 @@ namespace SwaggerDemo
 
             app.UseSwaggerUI(setupAction =>
                {
-                   setupAction.SwaggerEndpoint("/swagger/OpenAPISpecification/swagger.json", "Customer API");
+                   setupAction.SwaggerEndpoint("/swagger/OpenAPISpecificationCustomer/swagger.json", "Customer API");
+                   setupAction.SwaggerEndpoint("/swagger/OpenAPISpecificationWeatherDefault/swagger.json", "Weather default API");
+
                    setupAction.RoutePrefix = string.Empty;
                });
         }
