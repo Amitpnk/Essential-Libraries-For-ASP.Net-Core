@@ -20,16 +20,18 @@ namespace WebApplication1.Controllers
         }
 
         [HttpGet]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S112:General exceptions should never be thrown", 
+            Justification = "Throwed exception intensionally")]
         public IEnumerable<string> Get()
         {
             try
             {
-                _logger.LogInformation("Could break here :(");
+                _logger.LogInformation("Could break here :( ");
                 throw new Exception("bohhhh very bad error");
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "It broke :(");
+                _logger.LogError(e, "It broke :( ");
             }
             return new string[] { "value1", "value2" };
         }
