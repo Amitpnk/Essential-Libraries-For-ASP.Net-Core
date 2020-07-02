@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace SwaggerDemo.Features.CustomerFeatures.Queries
 {
     public class GetAllCustomerQuery : IRequest<IEnumerable<Customer>>
-    { 
+    {
         public class GetAllProductsQueryHandler : IRequestHandler<GetAllCustomerQuery, IEnumerable<Customer>>
         {
             private readonly IApplicationContext _context;
