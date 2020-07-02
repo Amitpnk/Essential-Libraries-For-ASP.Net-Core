@@ -1,11 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using SwaggerDemo.Data;
-using SwaggerDemo.Domain;
-using SwaggerDemo.Features.CustomerFeatures.Comands;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
+using SwaggerDemo.Features.CustomerFeatures.Comands;
 using System.Threading.Tasks;
 
 namespace SwaggerDemo.Controllers
@@ -19,7 +15,7 @@ namespace SwaggerDemo.Controllers
 
         protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
 
-      
+
         //[HttpGet]
         //public ActionResult<IEnumerable<Customer>> Get()
         //{
@@ -57,7 +53,7 @@ namespace SwaggerDemo.Controllers
 
             //return CreatedAtRoute("GetCustomer", new { id = customer.Id }, customer);
 
-            return  Ok(await Mediator.Send(customer));
+            return Ok(await Mediator.Send(customer));
 
         }
 

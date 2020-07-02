@@ -42,7 +42,7 @@ namespace SwaggerDemo
 
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddScoped<IApplicationContext>(provider => provider.GetService<ApplicationContext>());
-            
+
             services.AddControllers().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
