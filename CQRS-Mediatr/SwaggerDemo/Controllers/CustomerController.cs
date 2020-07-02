@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SwaggerDemo.Domain;
 using SwaggerDemo.Features.CustomerFeatures.Comands;
 using SwaggerDemo.Features.CustomerFeatures.Queries;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SwaggerDemo.Controllers
@@ -18,15 +19,11 @@ namespace SwaggerDemo.Controllers
         protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
 
 
-        //[HttpGet]
-        //public ActionResult<IEnumerable<Customer>> Get()
-        //{
-        //    var customers = _context.Customers.ToList();
-
-        //    return Ok(customers);
-        //}
-
-
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Customer>>> GetAsync()
+        {
+            return Ok(await Mediator.Send(new GetAllCustomerQuery()));
+        }
 
         [HttpGet]
         [Route("{id}", Name = "GetCustomer")]
