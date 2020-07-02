@@ -18,7 +18,6 @@ namespace SwaggerDemo.Controllers
 
         protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
 
-
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Customer>>> GetAsync()
         {
@@ -33,9 +32,8 @@ namespace SwaggerDemo.Controllers
 
             if (customers == null)
             {
-                NotFound();
+                return NotFound();
             }
-
             return Ok(customers);
         }
 
@@ -44,7 +42,7 @@ namespace SwaggerDemo.Controllers
         public async Task<IActionResult> Post([FromBody] CreateCustomerCommand command)
         {
             var customerId = await Mediator.Send(command);
-            return CreatedAtRoute("GetCustomer", new { id = customerId });
+            return CreatedAtRoute("GetCustomer", new { id = customerId }, command);
         }
 
         //// PUT api/<CustomerController>/5
@@ -56,27 +54,18 @@ namespace SwaggerDemo.Controllers
                 return NotFound();
             }
             return Ok(await Mediator.Send(command));
-
         }
 
         [HttpDelete]
         [Route("{customerId}")]
         public async Task<IActionResult> Delete(int customerId)
         {
-            //var customers = _context.Customers.Find(customerId);
-
-            // if (customers == null)
-            // {
-            //     NotFound();
-            // }
-            await Mediator.Send(new DeleteCustomerByIdCommand { Id = customerId });
-
+            var id = await Mediator.Send(new DeleteCustomerByIdCommand { Id = customerId });
+            if (id == 0)
+            {
+                return NotFound();
+            }
             return NoContent();
-
-
-
-
-
         }
     }
 }
