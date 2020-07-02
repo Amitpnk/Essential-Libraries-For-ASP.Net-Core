@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SwaggerDemo</name>
+    </assembly>
+    <members>
+        <member name="P:SwaggerDemo.Domain.Customer.Id">
+            <summary>
+            Id of Customer
+            </summary>
+        </member>
+        <member name="P:SwaggerDemo.Domain.Customer.CustomerName">
+            <summary>
+            Name of Customer
+            </summary>
+        </member>
+        <member name="P:SwaggerDemo.Domain.Customer.CustomerCode">
+            <summary>
+            code of Customer
+            </summary>
+        </member>
+    </members>
+</doc>
