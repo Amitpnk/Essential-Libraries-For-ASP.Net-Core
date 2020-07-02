@@ -6,28 +6,28 @@ using System.Threading.Tasks;
 
 namespace SwaggerDemo.Features.CustomerFeatures.Comands
 {
-    public class CustomerViewModel : IRequest<int>
+    public class CreateCustomerCommand : IRequest<int>
     {
         public string CustomerName { get; set; }
         public string CustomerCode { get; set; }
-    }
 
-    public class CreateProductCommandHandler : IRequestHandler<CustomerViewModel, int>
-    {
-        private readonly IApplicationContext _context;
-        public CreateProductCommandHandler(IApplicationContext context)
+        public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerCommand, int>
         {
-            _context = context;
-        }
-        public async Task<int> Handle(CustomerViewModel request, CancellationToken cancellationToken)
-        {
-            var customer = new Customer();
-            customer.CustomerCode = request.CustomerCode;
-            customer.CustomerName = request.CustomerName;
+            private readonly IApplicationContext _context;
+            public CreateCustomerCommandHandler(IApplicationContext context)
+            {
+                _context = context;
+            }
+            public async Task<int> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
+            {
+                var customer = new Customer();
+                customer.CustomerCode = request.CustomerCode;
+                customer.CustomerName = request.CustomerName;
 
-            _context.Customers.Add(customer);
-            await _context.SaveChangesAsync();
-            return customer.Id;
+                _context.Customers.Add(customer);
+                await _context.SaveChangesAsync();
+                return customer.Id;
+            }
         }
     }
 }

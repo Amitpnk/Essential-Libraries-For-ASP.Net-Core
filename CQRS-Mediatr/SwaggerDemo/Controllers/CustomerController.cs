@@ -1,7 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using SwaggerDemo.Domain;
 using SwaggerDemo.Features.CustomerFeatures.Comands;
+using SwaggerDemo.Features.CustomerFeatures.Queries;
 using System.Threading.Tasks;
 
 namespace SwaggerDemo.Controllers
@@ -25,75 +27,59 @@ namespace SwaggerDemo.Controllers
         //}
 
 
-        ///// <summary>
-        ///// Get customer detail by id
-        ///// </summary>
-        ///// <param name="id">This id is unique/primary key of customer </param>
-        ///// <returns>Customer details with id, customername and cutomer code fields</returns>
-        //[HttpGet]
-        //[Route("{id}", Name = "GetCustomer")]
-        //public ActionResult<Customer> Get(int id)
-        //{
-        //    var customers = _context.Customers.Find(id);
 
-        //    if (customers == null)
-        //    {
-        //        NotFound();
-        //    }
+        [HttpGet]
+        [Route("{id}", Name = "GetCustomer")]
+        public async Task<ActionResult<Customer>> GetAsync(int id)
+        {
+            var customers = await Mediator.Send(new GetCustomerByIdQuery { Id = id });
 
-        //    return Ok(customers);
-        //}
+            if (customers == null)
+            {
+                NotFound();
+            }
+
+            return Ok(customers);
+        }
 
         // POST api/<CustomerController>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] CustomerViewModel customer)
+        public async Task<IActionResult> Post([FromBody] CreateCustomerCommand command)
         {
-            //_context.Customers.Add(customer);
-            //_context.SaveChanges();
-
-            //return CreatedAtRoute("GetCustomer", new { id = customer.Id }, customer);
-
-            return Ok(await Mediator.Send(customer));
-
+            var customerId = await Mediator.Send(command);
+            return CreatedAtRoute("GetCustomer", new { id = customerId });
         }
 
         //// PUT api/<CustomerController>/5
-        //[HttpPut("{id}")]
-        //public IActionResult Put(int id, [FromBody] Customer customer)
-        //{
-        //    var customers = _context.Customers.First(a => a.Id == id);
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, [FromBody] UpdateCustomerCommand command)
+        {
+            if (id != command.Id)
+            {
+                return NotFound();
+            }
+            return Ok(await Mediator.Send(command));
 
-        //    if (customers == null)
-        //    {
-        //        NotFound();
-        //    }
+        }
 
-        //    // TODO- Use AutoMapper
-        //    customers.CustomerCode = customer.CustomerCode;
-        //    customers.CustomerName = customer.CustomerName;
+        [HttpDelete]
+        [Route("{customerId}")]
+        public async Task<IActionResult> Delete(int customerId)
+        {
+            //var customers = _context.Customers.Find(customerId);
 
-        //    _context.Customers.Update(customers);
-        //    _context.SaveChanges();
+            // if (customers == null)
+            // {
+            //     NotFound();
+            // }
+            await Mediator.Send(new DeleteCustomerByIdCommand { Id = customerId });
 
-        //    return Ok(customers);
+            return NoContent();
 
-        //}
 
-        //[HttpDelete]
-        //[Route("{customerId}")]
-        //public ActionResult<Customer> Delete(int customerId)
-        //{
-        //    var customers = _context.Customers.Find(customerId);
 
-        //    if (customers == null)
-        //    {
-        //        NotFound();
-        //    }
-        //    _context.Customers.Remove(customers);
-        //    _context.SaveChanges();
 
-        //    return NoContent();
 
-        //}
+        }
     }
 }
