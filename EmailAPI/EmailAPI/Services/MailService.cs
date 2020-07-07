@@ -53,5 +53,28 @@ namespace EmailAPI.Services
             smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
             await smtp.SendMailAsync(message);
         }
+
+        public async Task SendWelcomeEmailAsync(WelcomeRequest request)
+        {
+            string FilePath = Directory.GetCurrentDirectory() + "\\Templates\\WelcomeTemplate.html";
+            StreamReader str = new StreamReader(FilePath);
+            string MailText = str.ReadToEnd();
+            str.Close();
+            MailText = MailText.Replace("[username]", request.UserName).Replace("[email]", request.ToEmail);
+            MailMessage message = new MailMessage();
+            SmtpClient smtp = new SmtpClient();
+            message.From = new MailAddress(_mailSettings.Mail, _mailSettings.DisplayName);
+            message.To.Add(new MailAddress(request.ToEmail));
+            message.Subject = $"Welcome {request.UserName}";
+            message.IsBodyHtml = true;
+            message.Body = MailText;
+            smtp.Port = _mailSettings.Port;
+            smtp.Host = _mailSettings.Host;
+            smtp.EnableSsl = true;
+            smtp.UseDefaultCredentials = false;
+            smtp.Credentials = new NetworkCredential(_mailSettings.Mail, _mailSettings.Password);
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+            await smtp.SendMailAsync(message);
+        }
     }
 }
