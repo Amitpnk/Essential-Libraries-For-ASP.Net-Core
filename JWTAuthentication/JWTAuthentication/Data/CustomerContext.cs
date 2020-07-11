@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using JWTAuthentication.Domain;
+﻿using JWTAuthentication.Domain;
 using JWTAuthentication.Model;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace JWTAuthentication.Data
 {
@@ -12,7 +12,7 @@ namespace JWTAuthentication.Data
         {
 
         }
-       
+
 
         public CustomerContext()
         {

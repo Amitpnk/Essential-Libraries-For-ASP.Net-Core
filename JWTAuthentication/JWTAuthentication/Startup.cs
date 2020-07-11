@@ -1,10 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using JWTAuthentication.Data;
 using JWTAuthentication.Model;
 using JWTAuthentication.Services;
@@ -18,8 +11,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using System;
+using System.IO;
+using System.Reflection;
+using System.Text;
 
 namespace JWTAuthentication
 {
@@ -29,7 +25,7 @@ namespace JWTAuthentication
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-          
+
         }
 
         public IConfiguration Configuration { get; }
@@ -83,7 +79,7 @@ namespace JWTAuthentication
               });
 
             services.AddDbContext<CustomerContext>(opt =>
-                 opt.UseSqlServer(Configuration.GetConnectionString("JWTConnection") )
+                 opt.UseSqlServer(Configuration.GetConnectionString("JWTConnection"))
               );
 
             services.AddSwaggerGen(setupAction =>

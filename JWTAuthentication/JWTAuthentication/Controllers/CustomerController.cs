@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using JWTAuthentication.Data;
+﻿using JWTAuthentication.Data;
 using JWTAuthentication.Domain;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 
