@@ -1,0 +1,29 @@
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BasicJwtAuthentication.Controllers
+{
+    [Authorize]
+    [Route("api/[controller]")]
+    [ApiController]
+    public class SecuredController : ControllerBase
+    {
+        [HttpGet]
+        public async Task<IActionResult> GetSecuredData()
+        {
+            return Ok("Secured data");
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> PostSecuredData()
+        {
+            return Ok("Secured Data is available only for Authenticated Users");
+        }
+    }
+}
