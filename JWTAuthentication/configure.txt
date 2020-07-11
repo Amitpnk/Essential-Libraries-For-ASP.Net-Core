@@ -1,0 +1,7 @@
+constants -> Authorizations (Persistence layer)
+MOdels -> AddRoleModel.cs (Domain)
+		ApplicationUser.cs (peris or Domain)
+		AuthenticationModel.cs (Domain)
+		RegisterModel.cs (domain)
+		TookenRequestModel.cs (domain)
+Settings -> jwt.cs (infra -setting/ domain)
