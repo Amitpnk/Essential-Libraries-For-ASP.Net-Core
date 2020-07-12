@@ -1,6 +1,6 @@
-﻿using RefreshJwtAuthentication.Constants;
+﻿using Microsoft.AspNetCore.Identity;
+using RefreshJwtAuthentication.Constants;
 using RefreshJwtAuthentication.Model;
-using Microsoft.AspNetCore.Identity;
 using System.Linq;
 using System.Threading.Tasks;
 

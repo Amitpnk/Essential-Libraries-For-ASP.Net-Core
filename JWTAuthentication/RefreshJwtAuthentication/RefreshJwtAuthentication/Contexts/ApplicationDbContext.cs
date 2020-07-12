@@ -1,6 +1,6 @@
-﻿using RefreshJwtAuthentication.Model;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using RefreshJwtAuthentication.Model;
 
 namespace RefreshJwtAuthentication.Contexts
 {

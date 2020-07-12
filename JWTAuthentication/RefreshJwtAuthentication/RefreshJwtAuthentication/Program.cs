@@ -1,10 +1,10 @@
-using RefreshJwtAuthentication.Contexts;
-using RefreshJwtAuthentication.Model;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using RefreshJwtAuthentication.Contexts;
+using RefreshJwtAuthentication.Model;
 using System;
 using System.Threading.Tasks;
 
