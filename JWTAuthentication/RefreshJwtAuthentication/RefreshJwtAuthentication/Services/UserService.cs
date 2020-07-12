@@ -11,6 +11,10 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using RefreshJwtAuthentication.Entities;
+using System.Security.Cryptography;
+using Microsoft.AspNetCore.Http;
+using RefreshJwtAuthentication.Contexts;
 
 namespace RefreshJwtAuthentication.Services
 {
@@ -19,12 +23,17 @@ namespace RefreshJwtAuthentication.Services
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly JWT _jwt;
+        private readonly ApplicationDbContext _context;
 
-        public UserService(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IOptions<JWT> jwt)
+        public UserService(UserManager<ApplicationUser> userManager, 
+            RoleManager<IdentityRole> roleManager, 
+            IOptions<JWT> jwt, 
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _jwt = jwt.Value;
+            _context = context;
         }
 
         public async Task<string> RegisterAsync(RegisterModel model)
@@ -72,6 +81,24 @@ namespace RefreshJwtAuthentication.Services
                 authenticationModel.UserName = user.UserName;
                 var rolesList = await _userManager.GetRolesAsync(user).ConfigureAwait(false);
                 authenticationModel.Roles = rolesList.ToList();
+
+                if (user.RefreshTokens.Any(a => a.IsActive))
+                {
+                    var activeRefreshToken = user.RefreshTokens.Where(a => a.IsActive == true).FirstOrDefault();
+                    authenticationModel.RefreshToken = activeRefreshToken.Token;
+                    authenticationModel.RefreshTokenExpiration = activeRefreshToken.Expires;
+                }
+                else
+                {
+                    var refreshToken = CreateRefreshToken();
+                    authenticationModel.RefreshToken = refreshToken.Token;
+                    authenticationModel.RefreshTokenExpiration = refreshToken.Expires;
+                    user.RefreshTokens.Add(refreshToken);
+                    _context.Update(user);
+                    _context.SaveChanges();
+                }
+
+
                 return authenticationModel;
             }
             authenticationModel.IsAuthenticated = false;
@@ -133,5 +160,23 @@ namespace RefreshJwtAuthentication.Services
             return $"Incorrect Credentials for user {user.Email}.";
 
         }
+
+        private RefreshToken CreateRefreshToken()
+        {
+            var randomNumber = new byte[32];
+            using (var generator = new RNGCryptoServiceProvider())
+            {
+                generator.GetBytes(randomNumber);
+                return new RefreshToken
+                {
+                    Token = Convert.ToBase64String(randomNumber),
+                    Expires = DateTime.UtcNow.AddDays(10),
+                    Created = DateTime.UtcNow
+                };
+
+            }
+        }
+
+     
     }
 }
