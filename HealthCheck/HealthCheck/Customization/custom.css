@@ -1,0 +1,8 @@
+﻿:root {
+    --primaryColor: #8e47a0;
+    --secondaryColor: #b6ff00;
+    --bgMenuActive: #8e47a0;
+    --bgButton: #8e47a0;
+    --logoImageUrl: url('https://raw.githubusercontent.com/Amitpnk/Onion-architecture-ASP.NET-Core/master/Assert/OnionArchitecture_icon.png');
+    --bgAside: var(--primaryColor);
+}

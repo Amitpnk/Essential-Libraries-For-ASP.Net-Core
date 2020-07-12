@@ -40,7 +40,8 @@ namespace HealthCheck
             services.AddHealthChecks()
                  .AddDbContextCheck<DataContext>(name: "DB context", failureStatus: HealthStatus.Degraded)
                  .AddUrlGroup(new Uri("https://amitpnk.github.io/"), name: "My personal website", failureStatus: HealthStatus.Degraded)
-                 .AddCheck<CustomHealthCheck>(name: "New Custom Check", failureStatus: HealthStatus.Degraded);
+                 .AddCheck<CustomHealthCheck>(name: "New Custom Check", failureStatus: HealthStatus.Degraded)
+                 .AddSqlServer(Configuration.GetConnectionString("DefaultConnection"));
 
             services.AddHealthChecksUI(setupSettings: setup =>
             {
@@ -75,6 +76,7 @@ namespace HealthCheck
                {
                    setup.ApiPath = "/healthcheck";
                    setup.UIPath = "/healthcheck-ui";
+                   setup.AddCustomStylesheet("./Customization/custom.css");
                });
 
 
