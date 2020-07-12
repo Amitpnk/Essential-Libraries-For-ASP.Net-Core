@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using RefreshJwtAuthentication.Entities;
+using System.Collections.Generic;
 
 namespace RefreshJwtAuthentication.Model
 {
@@ -6,5 +8,6 @@ namespace RefreshJwtAuthentication.Model
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public List<RefreshToken> RefreshTokens { get; set; }
     }
 }
