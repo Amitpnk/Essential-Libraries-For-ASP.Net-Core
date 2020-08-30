@@ -24,9 +24,9 @@ namespace BasicJwtAuthentication
                 try
                 {
                     //Seed Default Users
-                    var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
-                    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-                    await ApplicationDbContextSeed.SeedEssentialsAsync(userManager, roleManager);
+                    //var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+                    //var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+                    //await ApplicationDbContextSeed.SeedEssentialsAsync(userManager, roleManager);
                 }
                 catch (Exception ex)
                 {
